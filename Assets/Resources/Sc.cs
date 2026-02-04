@@ -9,6 +9,23 @@ public class SimpleCubicStructure : MonoBehaviour
 
     void Start()
     {
+        BuildGrid();
+    }
+
+    public void IncreaseSize()
+    {
+        size += 1;
+        BuildGrid();
+    }
+
+    void BuildGrid()
+    {
+        // Clear previous grid
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+
         Vector3 offset = Vector3.one * (size - 1) * spacing / 2f;
         float sphereRadius = 0.5f * sphereScale;
 
@@ -44,7 +61,7 @@ public class SimpleCubicStructure : MonoBehaviour
         edge.transform.SetParent(transform, false);
 
         LineRenderer lr = edge.AddComponent<LineRenderer>();
-        lr.useWorldSpace = false; 
+        lr.useWorldSpace = false;
         lr.positionCount = 2;
         lr.SetPosition(0, start);
         lr.SetPosition(1, end);
