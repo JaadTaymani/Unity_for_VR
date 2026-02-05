@@ -18,6 +18,12 @@ public class SimpleCubicStructure : MonoBehaviour
         BuildGrid();
     }
 
+    public void DecreaseSize()
+    {
+        size -= 1;
+        BuildGrid();
+    }
+
     void BuildGrid()
     {
         // Clear previous grid

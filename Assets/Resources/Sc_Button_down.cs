@@ -2,7 +2,7 @@ using System.Collections;
 
 using UnityEngine;
 
-public class VRButton_Up : MonoBehaviour
+public class VRButton_Down : MonoBehaviour
 {
     // Time that the button is inactive after release
     public float deadTime = 1.0f;
@@ -29,8 +29,8 @@ public class VRButton_Up : MonoBehaviour
         {
             if (scStructure != null)
             {
-                scStructure.IncreaseSize();
-                Debug.Log("VR Button pressed: Grid size increased");
+                scStructure.DecreaseSize();
+                Debug.Log("VR Button pressed: Grid size Decreased");
             }
             else
             {
