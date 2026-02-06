@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using UnityEngine;
 
 public class SimpleCubicStructure : MonoBehaviour
@@ -15,12 +16,22 @@ public class SimpleCubicStructure : MonoBehaviour
     public void IncreaseSize()
     {
         size += 1;
+        if (size > 5) // Limit size to prevent excessive growth
+        {
+            size = 5;
+            return;
+        }
         BuildGrid();
     }
 
     public void DecreaseSize()
     {
         size -= 1;
+        if (size < 2) // Limit size to prevent excessive growth
+        {
+            size = 2;
+            return;
+        }
         BuildGrid();
     }
 

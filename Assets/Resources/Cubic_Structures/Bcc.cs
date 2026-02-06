@@ -9,6 +9,35 @@ public class BCCStructure : MonoBehaviour
 
     void Start()
     {
+        BuildGrid();
+    }
+
+    public void IncreaseSize()
+    {
+        size += 1;
+        if (size > 5)
+            size = 5;
+
+        BuildGrid();
+    }
+
+    public void DecreaseSize()
+    {
+        size -= 1;
+        if (size < 2)
+            size = 2;
+
+        BuildGrid();
+    }
+
+    void BuildGrid()
+    {
+        // Clear old structure
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+
         Vector3 offset = Vector3.one * (size - 1) * spacing / 2f;
         float sphereRadius = 0.5f * sphereScale;
 
@@ -20,7 +49,7 @@ public class BCCStructure : MonoBehaviour
                     Vector3 cornerPos = new Vector3(x, y, z) * spacing - offset;
                     CreateSphere(cornerPos);
 
-                    // Body-center atom (only if inside lattice)
+                    // Body-center atom
                     if (x < size - 1 && y < size - 1 && z < size - 1)
                     {
                         Vector3 centerPos = cornerPos + Vector3.one * (spacing * 0.5f);
