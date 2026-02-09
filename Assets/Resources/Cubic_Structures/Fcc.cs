@@ -2,13 +2,42 @@ using UnityEngine;
 
 public class FCCStructure : MonoBehaviour
 {
-    public int size = 3; // Number of unit cells in each direction
+    public int size = 3;          // Number of unit cells in each direction
     public float spacing = 1.5f;
     public float sphereScale = 0.4f;
     public float lineWidth = 0.03f;
 
     void Start()
     {
+        BuildGrid();
+    }
+
+    public void IncreaseSize()
+    {
+        size += 1;
+        if (size > 5)
+            size = 5;
+
+        BuildGrid();
+    }
+
+    public void DecreaseSize()
+    {
+        size -= 1;
+        if (size < 2)
+            size = 2;
+
+        BuildGrid();
+    }
+
+    void BuildGrid()
+    {
+        // Clear previous structure
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+
         // Center the whole structure around the parent object
         Vector3 offset = Vector3.one * (size - 1) * spacing / 2f;
         float sphereRadius = 0.5f * sphereScale;
@@ -19,38 +48,29 @@ public class FCCStructure : MonoBehaviour
             {
                 for (int z = 0; z < size; z++)
                 {
-                    // 1. Create the Corner Atom
+                    // Corner atom
                     Vector3 cornerPos = new Vector3(x, y, z) * spacing - offset;
                     CreateAtom(cornerPos);
 
-                    // 2. Create Face-Centered Atoms (Only if within bounds of a cell)
-                    // We place atoms at the centers of the XY, XZ, and YZ planes
-
-                    // XY Face center
+                    // Face-centered atoms
                     if (x < size - 1 && y < size - 1)
-                    {
-                        Vector3 faceXY = cornerPos + new Vector3(0.5f, 0.5f, 0) * spacing;
-                        CreateAtom(faceXY);
-                    }
+                        CreateAtom(cornerPos + new Vector3(0.5f, 0.5f, 0) * spacing);
 
-                    // XZ Face center
                     if (x < size - 1 && z < size - 1)
-                    {
-                        Vector3 faceXZ = cornerPos + new Vector3(0.5f, 0, 0.5f) * spacing;
-                        CreateAtom(faceXZ);
-                    }
+                        CreateAtom(cornerPos + new Vector3(0.5f, 0, 0.5f) * spacing);
 
-                    // YZ Face center
                     if (y < size - 1 && z < size - 1)
-                    {
-                        Vector3 faceYZ = cornerPos + new Vector3(0, 0.5f, 0.5f) * spacing;
-                        CreateAtom(faceYZ);
-                    }
+                        CreateAtom(cornerPos + new Vector3(0, 0.5f, 0.5f) * spacing);
 
-                    // 3. Create Edges (Standard Grid Lines)
-                    if (x < size - 1) CreateEdge(cornerPos, cornerPos + Vector3.right * spacing, sphereRadius);
-                    if (y < size - 1) CreateEdge(cornerPos, cornerPos + Vector3.up * spacing, sphereRadius);
-                    if (z < size - 1) CreateEdge(cornerPos, cornerPos + Vector3.forward * spacing, sphereRadius);
+                    // Edges
+                    if (x < size - 1)
+                        CreateEdge(cornerPos, cornerPos + Vector3.right * spacing, sphereRadius);
+
+                    if (y < size - 1)
+                        CreateEdge(cornerPos, cornerPos + Vector3.up * spacing, sphereRadius);
+
+                    if (z < size - 1)
+                        CreateEdge(cornerPos, cornerPos + Vector3.forward * spacing, sphereRadius);
                 }
             }
         }
@@ -67,7 +87,8 @@ public class FCCStructure : MonoBehaviour
     void CreateEdge(Vector3 start, Vector3 end, float radius)
     {
         Vector3 dir = (end - start).normalized;
-        // Offset the line so it doesn't clip through the center of the sphere
+
+        // Offset line so it doesn't clip through spheres
         Vector3 lineStart = start + dir * radius;
         Vector3 lineEnd = end - dir * radius;
 
