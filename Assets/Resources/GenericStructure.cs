@@ -17,11 +17,6 @@ public class GenericStructure : MonoBehaviour
 
     public List<StaticCrystal.Atom> basisAtoms = new();
 
-    void Start()
-    {
-        LoadData("Assets/Resources/saved structures/graphite.json"); // Change this string to change the loaded file.
-    }
-
     public void IncreaseSize()
     {
         size += 1;
@@ -105,13 +100,15 @@ public class GenericStructure : MonoBehaviour
     {
         string structureJSON = File.ReadAllText(path);
         SaveFile structureFile = JsonUtility.FromJson<SaveFile>(structureJSON);
+        size = structureFile.Size;
         a1 = new(structureFile.A1[0], structureFile.A1[1], structureFile.A1[2]);
         a2 = new(structureFile.A2[0], structureFile.A2[1], structureFile.A2[2]);
         a3 = new(structureFile.A3[0], structureFile.A3[1], structureFile.A3[2]);
+        basisAtoms = new();
         for (int i = 0; i < structureFile.BasisAtoms.Count; i++)
         {
             basisAtoms.Add(new(
-                new(x: structureFile.BasisAtoms[i].RelativePos[0], y: structureFile.BasisAtoms[i].RelativePos[1], z: structureFile.BasisAtoms[i].RelativePos[2]),
+                structureFile.BasisAtoms[i].RelativePos[0] * a1 + structureFile.BasisAtoms[i].RelativePos[1] * a2 + structureFile.BasisAtoms[i].RelativePos[2] * a3,
                 new(r: structureFile.BasisAtoms[i].Colour[0], g: structureFile.BasisAtoms[i].Colour[1], b: structureFile.BasisAtoms[i].Colour[2])
             ));
         }

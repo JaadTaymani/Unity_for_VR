@@ -5,6 +5,7 @@ using System.Collections.Generic;
 [Serializable]
 public class SaveFile
 {
+    public string Name;
     public int Size;
 
     // The three basis vectors:
@@ -19,6 +20,6 @@ public class SaveFile
 [Serializable]
 public class SaveAtom
 {
-    public float[] RelativePos;
+    public float[] RelativePos; // RelativePos is now saved in (u, v, w) form, whereas the StaticCrystal.Atom class stores it as a Vector3 equal to u*a1 + v*a2 + w*a3.
     public float[] Colour;
 }
