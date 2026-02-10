@@ -55,7 +55,10 @@ public class GenericStructure : MonoBehaviour
                 for (int n3 = 0; n3 < size; n3++)
                 {
                     Vector3 pos = spacing * (n1 * a1 + n2 * a2 + n3 * a3) - offset;
-                    foreach (StaticCrystal.Atom atom in basisAtoms)
+                    foreach (StaticCrystal.Atom atom in basisAtoms) if (
+                        Vector3.Dot(n1 * a1 + atom.relativePos, a1) <= (size - 1) * a1.sqrMagnitude &
+                        Vector3.Dot(n2 * a2 + atom.relativePos, a2) <= (size - 1) * a2.sqrMagnitude &
+                        Vector3.Dot(n3 * a3 + atom.relativePos, a3) <= (size - 1) * a3.sqrMagnitude) // Checks to see if the atom is within the structure.
                     {
                         GameObject sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                         sphere.transform.SetParent(transform, false);
