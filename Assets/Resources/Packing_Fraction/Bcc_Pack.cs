@@ -1,10 +1,14 @@
 using UnityEngine;
 
-public class Sc_Pack : MonoBehaviour
+public class Bcc_Pack : MonoBehaviour
 {
     public int size = 2;
     public float latticeConstant = 2.0f;
     public float lineWidth = 0.05f;
+    
+    // ✅ Color options for different atom types
+    public Color cornerAtomColor = new Color(0.25f, 0.35f, 0.9f);  // Blue
+    public Color bodyCenterAtomColor = new Color(0.9f, 0.35f, 0.25f);  // Red
 
     void Start()
     {
@@ -18,11 +22,17 @@ public class Sc_Pack : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        float sphereRadius = latticeConstant / 2f;
+        // ✅ BCC: atoms touch along body diagonal
+        // Body diagonal = sqrt(3) * latticeConstant
+        // Distance from corner to body center = sqrt(3) * latticeConstant / 2
+        // So radius = sqrt(3) * latticeConstant / 4
+        float sphereRadius = Mathf.Sqrt(3f) * latticeConstant / 4f;
+
         Vector3 cubeMin = Vector3.zero;
         Vector3 cubeMax = Vector3.one * (size - 1) * latticeConstant;
         Vector3 cubeCenter = (cubeMin + cubeMax) / 2f;
 
+        // Corner atoms - BLUE
         for (int x = 0; x < size; x++)
             for (int y = 0; y < size; y++)
                 for (int z = 0; z < size; z++)
@@ -32,7 +42,24 @@ public class Sc_Pack : MonoBehaviour
                         pos,
                         sphereRadius,
                         cubeMin - cubeCenter,
-                        cubeMax - cubeCenter
+                        cubeMax - cubeCenter,
+                        cornerAtomColor
+                    );
+                    sphere.transform.SetParent(transform, false);
+                }
+
+        // Body-center atoms - RED
+        for (int x = 0; x < size - 1; x++)
+            for (int y = 0; y < size - 1; y++)
+                for (int z = 0; z < size - 1; z++)
+                {
+                    Vector3 pos = (new Vector3(x, y, z) + new Vector3(0.5f, 0.5f, 0.5f)) * latticeConstant - cubeCenter;
+                    GameObject sphere = CreateClippedSphere(
+                        pos,
+                        sphereRadius,
+                        cubeMin - cubeCenter,
+                        cubeMax - cubeCenter,
+                        bodyCenterAtomColor
                     );
                     sphere.transform.SetParent(transform, false);
                 }
@@ -40,26 +67,26 @@ public class Sc_Pack : MonoBehaviour
         CreateBoundingBox(cubeMin - cubeCenter, cubeMax - cubeCenter);
     }
 
-    GameObject CreateClippedSphere(Vector3 center, float radius, Vector3 cubeMin, Vector3 cubeMax)
-{
-    GameObject sphere = new GameObject("ClippedSphere");
-    sphere.transform.localPosition = center;
+    GameObject CreateClippedSphere(Vector3 center, float radius, Vector3 cubeMin, Vector3 cubeMax, Color color)
+    {
+        GameObject sphere = new GameObject("ClippedSphere");
+        sphere.transform.localPosition = center;
 
-    MeshFilter mf = sphere.AddComponent<MeshFilter>();
-    MeshRenderer mr = sphere.AddComponent<MeshRenderer>();
+        MeshFilter mf = sphere.AddComponent<MeshFilter>();
+        MeshRenderer mr = sphere.AddComponent<MeshRenderer>();
 
-    Mesh mesh = GenerateClippedSphereMesh(center, radius, cubeMin, cubeMax, 30);
-    mf.mesh = mesh;
+        Mesh mesh = GenerateClippedSphereMesh(center, radius, cubeMin, cubeMax, 30);
+        mf.mesh = mesh;
 
-    Material mat = new Material(Shader.Find("Universal Render Pipeline/Unlit"));
-    mat.color = new Color(0.25f, 0.35f, 0.9f);
-    
-    mr.material = mat;
-    mr.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-    mr.receiveShadows = false;
+        Material mat = new Material(Shader.Find("Universal Render Pipeline/Unlit"));
+        mat.color = color;
 
-    return sphere;
-}
+        mr.material = mat;
+        mr.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+        mr.receiveShadows = false;
+
+        return sphere;
+    }
 
     Mesh GenerateClippedSphereMesh(Vector3 center, float radius, Vector3 cubeMin, Vector3 cubeMax, int segments)
     {

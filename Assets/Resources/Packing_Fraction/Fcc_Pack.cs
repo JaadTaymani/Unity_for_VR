@@ -1,10 +1,13 @@
 using UnityEngine;
 
-public class Sc_Pack : MonoBehaviour
+public class Fcc_Pack : MonoBehaviour
 {
     public int size = 2;
     public float latticeConstant = 2.0f;
     public float lineWidth = 0.05f;
+    
+    public Color cornerAtomColor = new Color(0.25f, 0.35f, 0.9f);  // Blue
+    public Color faceAtomColor = new Color(0.9f, 0.35f, 0.25f);    // Red
 
     void Start()
     {
@@ -18,11 +21,12 @@ public class Sc_Pack : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        float sphereRadius = latticeConstant / 2f;
+        float sphereRadius = latticeConstant / (2f * Mathf.Sqrt(2f));
         Vector3 cubeMin = Vector3.zero;
         Vector3 cubeMax = Vector3.one * (size - 1) * latticeConstant;
         Vector3 cubeCenter = (cubeMin + cubeMax) / 2f;
 
+        // Corner atoms (Simple Cubic positions) - BLUE
         for (int x = 0; x < size; x++)
             for (int y = 0; y < size; y++)
                 for (int z = 0; z < size; z++)
@@ -32,7 +36,57 @@ public class Sc_Pack : MonoBehaviour
                         pos,
                         sphereRadius,
                         cubeMin - cubeCenter,
-                        cubeMax - cubeCenter
+                        cubeMax - cubeCenter,
+                        cornerAtomColor  // ✅ Pass color
+                    );
+                    sphere.transform.SetParent(transform, false);
+                }
+
+        // Face center atoms (FCC positions) - RED
+        // Top and bottom faces (z constant)
+        for (int x = 0; x < size - 1; x++)
+            for (int y = 0; y < size - 1; y++)
+                for (int z = 0; z < size; z++)
+                {
+                    Vector3 pos = (new Vector3(x, y, z) + new Vector3(0.5f, 0.5f, 0)) * latticeConstant - cubeCenter;
+                    GameObject sphere = CreateClippedSphere(
+                        pos,
+                        sphereRadius,
+                        cubeMin - cubeCenter,
+                        cubeMax - cubeCenter,
+                        faceAtomColor 
+                    );
+                    sphere.transform.SetParent(transform, false);
+                }
+
+        // Front and back faces (y constant)
+        for (int x = 0; x < size - 1; x++)
+            for (int y = 0; y < size; y++)
+                for (int z = 0; z < size - 1; z++)
+                {
+                    Vector3 pos = (new Vector3(x, y, z) + new Vector3(0.5f, 0, 0.5f)) * latticeConstant - cubeCenter;
+                    GameObject sphere = CreateClippedSphere(
+                        pos,
+                        sphereRadius,
+                        cubeMin - cubeCenter,
+                        cubeMax - cubeCenter,
+                        faceAtomColor  
+                    );
+                    sphere.transform.SetParent(transform, false);
+                }
+
+        // Left and right faces (x constant)
+        for (int x = 0; x < size; x++)
+            for (int y = 0; y < size - 1; y++)
+                for (int z = 0; z < size - 1; z++)
+                {
+                    Vector3 pos = (new Vector3(x, y, z) + new Vector3(0, 0.5f, 0.5f)) * latticeConstant - cubeCenter;
+                    GameObject sphere = CreateClippedSphere(
+                        pos,
+                        sphereRadius,
+                        cubeMin - cubeCenter,
+                        cubeMax - cubeCenter,
+                        faceAtomColor  
                     );
                     sphere.transform.SetParent(transform, false);
                 }
@@ -40,26 +94,26 @@ public class Sc_Pack : MonoBehaviour
         CreateBoundingBox(cubeMin - cubeCenter, cubeMax - cubeCenter);
     }
 
-    GameObject CreateClippedSphere(Vector3 center, float radius, Vector3 cubeMin, Vector3 cubeMax)
-{
-    GameObject sphere = new GameObject("ClippedSphere");
-    sphere.transform.localPosition = center;
+    GameObject CreateClippedSphere(Vector3 center, float radius, Vector3 cubeMin, Vector3 cubeMax, Color color)  
+    {
+        GameObject sphere = new GameObject("ClippedSphere");
+        sphere.transform.localPosition = center;
 
-    MeshFilter mf = sphere.AddComponent<MeshFilter>();
-    MeshRenderer mr = sphere.AddComponent<MeshRenderer>();
+        MeshFilter mf = sphere.AddComponent<MeshFilter>();
+        MeshRenderer mr = sphere.AddComponent<MeshRenderer>();
 
-    Mesh mesh = GenerateClippedSphereMesh(center, radius, cubeMin, cubeMax, 30);
-    mf.mesh = mesh;
+        Mesh mesh = GenerateClippedSphereMesh(center, radius, cubeMin, cubeMax, 30);
+        mf.mesh = mesh;
 
-    Material mat = new Material(Shader.Find("Universal Render Pipeline/Unlit"));
-    mat.color = new Color(0.25f, 0.35f, 0.9f);
-    
-    mr.material = mat;
-    mr.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
-    mr.receiveShadows = false;
+        Material mat = new Material(Shader.Find("Universal Render Pipeline/Unlit"));
+        mat.color = color;  
 
-    return sphere;
-}
+        mr.material = mat;
+        mr.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
+        mr.receiveShadows = false;
+
+        return sphere;
+    }
 
     Mesh GenerateClippedSphereMesh(Vector3 center, float radius, Vector3 cubeMin, Vector3 cubeMax, int segments)
     {
