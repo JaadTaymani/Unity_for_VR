@@ -14,7 +14,68 @@ public class MillerIndexGenerator : MonoBehaviour
     {
         GeneratePlane();
     }
+    public void IncreaseSizeH()
+    {
+        h += 1;
+        if (h > 5) // Limit size to prevent excessive growth
+        {
+            h = 5;
+            return;
+        }
+        GeneratePlane();
+    }
 
+    public void IncreaseSizeK()
+    {
+        k += 1;
+        if (k > 5) // Limit size to prevent excessive growth
+        {
+            k = 5;
+            return;
+        }
+        GeneratePlane();
+    }
+
+    public void IncreaseSizeL()
+    {
+        l += 1;
+        if (l > 5) // Limit size to prevent excessive growth
+        {
+            l = 5;
+            return;
+        }
+        GeneratePlane();
+    }
+    public void DecreaseSizeH()
+    {
+        h -= 1;
+        if (h < 1) // Limit size to prevent excessive growth
+        {
+            h = 1;
+            return;
+        }
+        GeneratePlane();
+        }
+    public void DecreaseSizeK()
+    {
+        k -= 1;
+        if (k < 1) // Limit size to prevent excessive growth
+        {
+            k = 1;
+            return;
+        }
+        GeneratePlane();
+    }
+    public void DecreaseSizeL()
+    {
+        l -= 1;
+        if (l < 1) // Limit size to prevent excessive growth
+        {
+            l = 1;
+            return;
+        }
+        GeneratePlane();
+    }
     void GeneratePlane()
     {
         Mesh mesh = new Mesh();
