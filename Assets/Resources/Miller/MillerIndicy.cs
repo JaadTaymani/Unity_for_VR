@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -9,7 +10,15 @@ public class MillerIndexGenerator : MonoBehaviour
 {
     public int h = 1, k = 1, l = 1;
     public float scale = 5f;
-
+    public TextMeshProUGUI millerText;
+    void UpdateMillerText()
+{
+    if (millerText != null)
+    {
+        millerText.text = $"h = {h}   k = {k}   l = {l}";
+    }
+}
+        
     void OnValidate()
     {
         GeneratePlane();
@@ -23,6 +32,7 @@ public class MillerIndexGenerator : MonoBehaviour
             return;
         }
         GeneratePlane();
+        UpdateMillerText();
     }
 
     public void IncreaseSizeK()
@@ -34,6 +44,7 @@ public class MillerIndexGenerator : MonoBehaviour
             return;
         }
         GeneratePlane();
+        UpdateMillerText();
     }
 
     public void IncreaseSizeL()
@@ -45,6 +56,7 @@ public class MillerIndexGenerator : MonoBehaviour
             return;
         }
         GeneratePlane();
+        UpdateMillerText();
     }
     public void DecreaseSizeH()
     {
@@ -55,6 +67,7 @@ public class MillerIndexGenerator : MonoBehaviour
             return;
         }
         GeneratePlane();
+        UpdateMillerText();
         }
     public void DecreaseSizeK()
     {
@@ -65,6 +78,7 @@ public class MillerIndexGenerator : MonoBehaviour
             return;
         }
         GeneratePlane();
+        UpdateMillerText();
     }
     public void DecreaseSizeL()
     {
@@ -75,6 +89,7 @@ public class MillerIndexGenerator : MonoBehaviour
             return;
         }
         GeneratePlane();
+        UpdateMillerText();
     }
     void GeneratePlane()
     {
