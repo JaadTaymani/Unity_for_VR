@@ -2,11 +2,14 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR;
+using static UnityEngine.XR.Interaction.Toolkit.Inputs.Haptics.HapticsUtility;
 
 // A class used for the canvas that contains the buttons to switch structure.
 public class ButtonCanvas : MonoBehaviour
 {
     public GenericStructure structure;
+    private InputDevice rightController;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -18,6 +21,32 @@ public class ButtonCanvas : MonoBehaviour
         {
             AddButton(JsonUtility.FromJson<SaveFile>(File.ReadAllText(path)).Name, index, path);
             index++;
+        }
+
+        // Rescales the canvas and places it in front of the XR origin.
+        GetComponent<RectTransform>().localScale = new(0.005f, 0.005f, 0.005f);
+        GetComponent<RectTransform>().position = new(0, 2, 4);
+    }
+
+    void Update()
+    {
+        if (!rightController.isValid)
+        {
+            print("Controller invalid; attempting to validate.");
+            List<InputDevice> inputDevices = new();
+            InputDevices.GetDevicesWithCharacteristics(InputDeviceCharacteristics.Controller | InputDeviceCharacteristics.Right, inputDevices);
+            if (inputDevices.Count > 0)
+            {
+                rightController = inputDevices[0];
+            }
+        }
+        else
+        {
+            print("Controller valid; attempting to read value.");
+            if (rightController.TryGetFeatureValue(CommonUsages.secondaryButton, out bool secondaryButton))
+            {
+                print("Value read: " + secondaryButton.ToString());
+            }
         }
     }
 
