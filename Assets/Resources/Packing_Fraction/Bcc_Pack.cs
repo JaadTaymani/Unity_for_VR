@@ -6,7 +6,6 @@ public class Bcc_Pack : MonoBehaviour
     public float latticeConstant = 2.0f;
     public float lineWidth = 0.05f;
     
-    // ✅ Color options for different atom types
     public Color cornerAtomColor = new Color(0.25f, 0.35f, 0.9f);  // Blue
     public Color bodyCenterAtomColor = new Color(0.9f, 0.35f, 0.25f);  // Red
 
@@ -22,7 +21,6 @@ public class Bcc_Pack : MonoBehaviour
             Destroy(child.gameObject);
         }
 
-        // ✅ BCC: atoms touch along body diagonal
         // Body diagonal = sqrt(3) * latticeConstant
         // Distance from corner to body center = sqrt(3) * latticeConstant / 2
         // So radius = sqrt(3) * latticeConstant / 4
