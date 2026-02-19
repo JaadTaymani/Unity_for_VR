@@ -1,5 +1,6 @@
 {
   "Name": "Diamond",
+  "Info": "A face-centred cubic lattice with a two atom basis. This is known a tetrahedral structre.",
   "Size": 2,
   "A1": [
     2,

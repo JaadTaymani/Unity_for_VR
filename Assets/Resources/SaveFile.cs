@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class SaveFile
 {
     public string Name;
+    public string Info;
     public int Size;
 
     // The three basis vectors:

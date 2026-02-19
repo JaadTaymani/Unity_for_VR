@@ -1,5 +1,6 @@
 {
   "Name": "Face-Centred Cubic",
+  "Info": "Side lengths: a=b=c\nAngles: α=β=γ=90°\nAdditional info:",
   "Size": 2,
   "A1": [
     1,

@@ -1,5 +1,6 @@
 {
   "Name": "Hexagonal",
+  "Info": "Side lengths: a=b≠c\nAngles: α=β=90°, γ=120°\nAdditional info:",
   "Size": 2,
   "A1": [
     1,

@@ -1,5 +1,6 @@
 {
   "Name": "Graphite",
+  "Info": "A haxagonal cubic lattice with a two atom basis. This is known as a honeycomb structure.",
   "Size": 3,
   "A1": [
     1,
