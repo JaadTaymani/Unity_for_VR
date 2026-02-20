@@ -1,0 +1,118 @@
+{
+  "Name": "Diamond",
+  "Info": "A face-centred cubic lattice with a two atom basis. This is known a tetrahedral structre.",
+  "Size": 2,
+  "A1": [
+    2,
+    0,
+    0
+  ],
+  "A2": [
+    0,
+    2,
+    0
+  ],
+  "A3": [
+    0,
+    0,
+    2
+  ],
+  "BasisAtoms": [
+    {
+      "RelativePos": [
+        0,
+        0,
+        0
+      ],
+      "Colour": [
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "RelativePos": [
+        0.25,
+        0.25,
+        0.25
+      ],
+      "Colour": [
+        1,
+        0.5,
+        0
+      ]
+    },
+    {
+      "RelativePos": [
+        0,
+        0.5,
+        0.5
+      ],
+      "Colour": [
+        0.5,
+        1,
+        0
+      ]
+    },
+    {
+      "RelativePos": [
+        0.25,
+        0.75,
+        0.75
+      ],
+      "Colour": [
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "RelativePos": [
+        0.5,
+        0,
+        0.5
+      ],
+      "Colour": [
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "RelativePos": [
+        0.75,
+        0.25,
+        0.75
+      ],
+      "Colour": [
+        0,
+        0.5,
+        1
+      ]
+    },
+    {
+      "RelativePos": [
+        0.5,
+        0.5,
+        0
+      ],
+      "Colour": [
+        0.5,
+        0,
+        1
+      ]
+    },
+    {
+      "RelativePos": [
+        0.75,
+        0.75,
+        0.25
+      ],
+      "Colour": [
+        1,
+        0,
+        1
+      ]
+    }
+  ]
+}

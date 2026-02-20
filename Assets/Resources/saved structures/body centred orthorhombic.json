@@ -1,0 +1,46 @@
+{
+  "Name": "Body-Centred Orthorhombic",
+  "Info": "Side lengths: a≠b≠c\nAngles: α=β=γ=90°\nAdditional info:",
+  "Size": 2,
+  "A1": [
+    0.5,
+    0,
+    0
+  ],
+  "A2": [
+    0,
+    1,
+    0
+  ],
+  "A3": [
+    0,
+    0,
+    2
+  ],
+  "BasisAtoms": [
+    {
+      "RelativePos": [
+        0,
+        0,
+        0
+      ],
+      "Colour": [
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "RelativePos": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "Colour": [
+        0,
+        1,
+        1
+      ]
+    }
+  ]
+}
