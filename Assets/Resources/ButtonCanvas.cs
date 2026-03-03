@@ -165,7 +165,7 @@ public class ButtonCanvas : MonoBehaviour
         increaseSizeButton.GetComponentInChildren<Text>().text = "Increase Size";
         increaseSizeButton.GetComponentInChildren<Text>().fontSize = 10;
         increaseSizeButton.GetComponent<Button>().onClick.AddListener(structure.IncreaseSize);
-        loadObjectList.Add(increaseSizeButton);
+        editObjectList.Add(increaseSizeButton);
 
         GameObject decreaseSizeButton = DefaultControls.CreateButton(resources);
         decreaseSizeButton.transform.SetParent(transform, false);
@@ -175,7 +175,18 @@ public class ButtonCanvas : MonoBehaviour
         decreaseSizeButton.GetComponentInChildren<Text>().text = "Decrease Size";
         decreaseSizeButton.GetComponentInChildren<Text>().fontSize = 10;
         decreaseSizeButton.GetComponent<Button>().onClick.AddListener(structure.DecreaseSize);
-        loadObjectList.Add(decreaseSizeButton);
+        editObjectList.Add(decreaseSizeButton);
+
+        GameObject textInputField = DefaultControls.CreateInputField(resources);
+        textInputField.transform.SetParent(transform, false);
+        textInputField.GetComponent<RectTransform>().position += 0.45f * localY;
+        textInputField.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 160);
+        textInputField.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 20);
+        foreach (Text text in textInputField.GetComponentsInChildren<Text>())
+        {
+            text.fontSize = 10;
+        };
+        editObjectList.Add(textInputField);
     }
 
     // Adds the required objects to the "info" menu.
