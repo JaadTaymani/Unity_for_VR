@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b54ceeff841fe4fe0979429430e25b7c, type: 3}
+  m_Name: BCCLattice
+  m_EditorClassIdentifier: Assembly-CSharp::QuestionSet
+  questionText: How many lattice sites are in a BCC conventional unit cell?
+  answerPrefabs:
+  - {fileID: 2169670939084531989, guid: b926f36a641c041a88609d1654991280, type: 3}
+  - {fileID: 2804523179405670890, guid: 30b03e9c412794dd1aa46ad61225c602, type: 3}
+  - {fileID: 8031550600607826968, guid: 107e275c7f7714d73b4f8f71a9b3832d, type: 3}
+  correctIndex: 1

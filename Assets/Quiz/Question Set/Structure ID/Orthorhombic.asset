@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b54ceeff841fe4fe0979429430e25b7c, type: 3}
+  m_Name: Orthorhombic
+  m_EditorClassIdentifier: Assembly-CSharp::QuestionSet
+  questionText: Which structure shows Orthorhombic?
+  answerPrefabs:
+  - {fileID: 8834122309898097295, guid: 422e82c2116ce4ff69eefbbb3388b037, type: 3}
+  - {fileID: 108252271159525622, guid: 4536a8c36c3b04a5b96a14a338c0a0f3, type: 3}
+  - {fileID: 8792186582726954772, guid: e2f9c10f998b1464b91e09ebed29b364, type: 3}
+  correctIndex: 2

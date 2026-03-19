@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b54ceeff841fe4fe0979429430e25b7c, type: 3}
+  m_Name: PackingFCC
+  m_EditorClassIdentifier: Assembly-CSharp::QuestionSet
+  questionText: Along which axis do atoms touch within FCC max packing?
+  answerPrefabs:
+  - {fileID: 342396311902688314, guid: 175167d61d9f54a7897a8ae8e028dd6d, type: 3}
+  - {fileID: 5081037690726455473, guid: 6efd93465f53f454f976e974965ab8e6, type: 3}
+  - {fileID: 3469463848171833372, guid: 35bfd0ac5f73243b0bafee0f0e805021, type: 3}
+  correctIndex: 0
