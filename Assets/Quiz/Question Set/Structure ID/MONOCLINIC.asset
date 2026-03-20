@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b54ceeff841fe4fe0979429430e25b7c, type: 3}
+  m_Name: MONOCLINIC
+  m_EditorClassIdentifier: Assembly-CSharp::QuestionSet
+  questionText: Which structure shows Monoclinic?
+  answerPrefabs:
+  - {fileID: 5776334972283788768, guid: 0a3843cca10d149059fba7b21fd4ec41, type: 3}
+  - {fileID: 283591110026195038, guid: 880c610aa00bd4cc0aac4f861cbfd08f, type: 3}
+  - {fileID: 108252271159525622, guid: 4536a8c36c3b04a5b96a14a338c0a0f3, type: 3}
+  correctIndex: 1

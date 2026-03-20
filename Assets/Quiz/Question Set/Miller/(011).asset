@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b54ceeff841fe4fe0979429430e25b7c, type: 3}
+  m_Name: (011)
+  m_EditorClassIdentifier: Assembly-CSharp::QuestionSet
+  questionText: Using the axis provided, which miller plane shows h, k, l, (011)?
+  answerPrefabs:
+  - {fileID: 7067197615345120253, guid: 29f1c5ae630c943f797af05c8a4d615d, type: 3}
+  - {fileID: 7067197615345120253, guid: 9a7cd70dba47f42cd84c27c8a2cd4de1, type: 3}
+  - {fileID: 7067197615345120253, guid: 1c0e332cf378e4592aad4f336a12c10c, type: 3}
+  correctIndex: 0
