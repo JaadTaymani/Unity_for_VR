@@ -379,6 +379,11 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+--- !u!20 &157460337 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1767192439, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+  m_PrefabInstance: {fileID: 636895570}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &299639867
 GameObject:
   m_ObjectHideFlags: 0
@@ -622,10 +627,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6c7689b54cd36147b1ce0b5ae2b65be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Canvas
-  xrCamera: {fileID: 0}
+  xrCamera: {fileID: 157460337}
   structure: {fileID: 1960650305}
-  millerIndicesScene: 
-  quizScene: Assets/Scenes/Quiz.unity
+  millerIndicesScene: Assets/Scenes/MillerIndicesScene.unity
+  quizScene: Assets/Scenes/BasicScene.unity
 --- !u!114 &500811275
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 // A class used for the canvas that contains the buttons to switch structure.
-public class ButtonCanvas : MonoBehaviour
+public class StructureViewerUI : MonoBehaviour
 {
     public Camera xrCamera;
     public GenericStructure structure;
