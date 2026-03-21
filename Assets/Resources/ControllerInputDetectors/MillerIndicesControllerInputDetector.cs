@@ -8,54 +8,79 @@ public class MillerIndicesControllerInputDetector : MonoBehaviour
     private InputDevice rightController;
     private bool rightSecondaryPressed;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //buttonCanvasObject.SetActive(false);
-        buttonCanvasObject.GetComponent<MillerIndicesUI>().Open();
+        // Ensure the menu starts off so the first press opens it
+        if (buttonCanvasObject != null)
+        {
+            buttonCanvasObject.SetActive(false);
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // Checks if the right headset controller is connected.
         if (!rightController.isValid)
         {
-            // Attempts to find the right headset controller.
-            List<InputDevice> inputDevices = new();
-            InputDevices.GetDevicesWithCharacteristics(InputDeviceCharacteristics.Controller | InputDeviceCharacteristics.Right, inputDevices);
-            if (inputDevices.Count > 0)
-            {
-                rightController = inputDevices[0];
-            }
+            InitializeController();
         }
         else
         {
-            // Reads the Boolean value of the right secondary button.
-            if (rightController.TryGetFeatureValue(CommonUsages.secondaryButton, out bool secondaryButton))
+            HandleInput();
+        }
+    }
+
+    private void InitializeController()
+    {
+        List<InputDevice> inputDevices = new List<InputDevice>();
+        InputDevices.GetDevicesWithCharacteristics(InputDeviceCharacteristics.Controller | InputDeviceCharacteristics.Right, inputDevices);
+        if (inputDevices.Count > 0)
+        {
+            rightController = inputDevices[0];
+        }
+    }
+
+    private void HandleInput()
+    {
+        // TryGetFeatureValue returns true if the feature is available, 
+        // and 'isPressed' tells us the actual state of the button.
+        if (rightController.TryGetFeatureValue(CommonUsages.secondaryButton, out bool isPressed))
+        {
+            if (isPressed)
             {
-                // Calls a method if it was just pressed.
+                // Only trigger if this is a NEW press (wasn't pressed last frame)
                 if (!rightSecondaryPressed)
                 {
-                    // Opens the menu if it was closed.
-                    if (!buttonCanvasObject.activeSelf)
-                    {
-                        buttonCanvasObject.GetComponent<MillerIndicesUI>().Open();
-                        buttonCanvasObject.SetActive(true);
-                    }
-                    // Closes the menu if it was open.
-                    else
-                    {
-                        buttonCanvasObject.GetComponent<MillerIndicesUI>().Close();
-                        buttonCanvasObject.SetActive(false);
-                    }
+                    ToggleMenu();
+                    rightSecondaryPressed = true;
                 }
-                rightSecondaryPressed = true; // Sets a variable to true so that on the next update, if the button is still pressed, the method will not run.
             }
             else
             {
-                rightSecondaryPressed = false; // Sets the variable to false so that on the next update, if the button becomes pressed, the method will run.
+                // Reset the flag only when the user actually lets go
+                rightSecondaryPressed = false;
             }
+        }
+    }
+
+    private void ToggleMenu()
+    {
+        if (buttonCanvasObject == null) return;
+
+        MillerIndicesUI uiScript = buttonCanvasObject.GetComponent<MillerIndicesUI>();
+
+        if (!buttonCanvasObject.activeSelf)
+        {
+            // Position and build the UI first
+            uiScript.Open();
+            // Then make it visible
+            buttonCanvasObject.SetActive(true);
+        }
+        else
+        {
+            // Clean up the UI
+            uiScript.Close();
+            // Then hide it
+            buttonCanvasObject.SetActive(false);
         }
     }
 }
