@@ -40,13 +40,13 @@ public class QuizControllerInputDetector : MonoBehaviour
                     // Opens the menu if it was closed.
                     if (!buttonCanvasObject.activeSelf)
                     {
-                        buttonCanvasObject.GetComponent<MillerIndicesUI>().Open();
+                        buttonCanvasObject.GetComponent<QuizUI>().Open();
                         buttonCanvasObject.SetActive(true);
                     }
                     // Closes the menu if it was open.
                     else
                     {
-                        buttonCanvasObject.GetComponent<MillerIndicesUI>().Close();
+                        buttonCanvasObject.GetComponent<QuizUI>().Close();
                         buttonCanvasObject.SetActive(false);
                     }
                 }
