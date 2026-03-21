@@ -8,6 +8,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 55daccc09a3b69647bbab145b54a3ab3
+  - enabled: 1
+    path: Assets/Scenes/BasicScene.unity
+    guid: 4e9fef26e6adb88479ad1b9834a32d94
+  - enabled: 1
+    path: Assets/Scenes/StructureViewerScene.unity
+    guid: d8eb9112db4e69f4ab768741c13c03fd
+  - enabled: 1
+    path: Assets/Scenes/Quiz.unity
+    guid: b725008de8ff44dff9817d496b7f2e2d
+  - enabled: 1
+    path: Assets/Scenes/MillerIndicesScene.unity
+    guid: c98b88660272591468a09491174b7ff1
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: bfa1182bd221b4ca89619141f66f1260, type: 2}
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: dc5a169419fa04987b057f65238cf3ba, type: 2}

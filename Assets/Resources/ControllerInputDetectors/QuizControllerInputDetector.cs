@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 
-public class ControllerInputDetector : MonoBehaviour
+public class QuizControllerInputDetector : MonoBehaviour
 {
     public GameObject buttonCanvasObject;
     private InputDevice rightController;
@@ -11,7 +11,8 @@ public class ControllerInputDetector : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        buttonCanvasObject.SetActive(false);
+        //buttonCanvasObject.SetActive(false);
+        buttonCanvasObject.GetComponent<QuizUI>().Open();
     }
 
     // Update is called once per frame
@@ -39,13 +40,13 @@ public class ControllerInputDetector : MonoBehaviour
                     // Opens the menu if it was closed.
                     if (!buttonCanvasObject.activeSelf)
                     {
-                        buttonCanvasObject.GetComponent<ButtonCanvas>().Open();
+                        buttonCanvasObject.GetComponent<MillerIndicesUI>().Open();
                         buttonCanvasObject.SetActive(true);
                     }
                     // Closes the menu if it was open.
                     else
                     {
-                        buttonCanvasObject.GetComponent<ButtonCanvas>().Close();
+                        buttonCanvasObject.GetComponent<MillerIndicesUI>().Close();
                         buttonCanvasObject.SetActive(false);
                     }
                 }
