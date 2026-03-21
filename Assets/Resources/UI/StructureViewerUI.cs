@@ -205,6 +205,7 @@ public class StructureViewerUI : MonoBehaviour
     // Called whenever the UI panel is closed to destroy all objects from it.
     public void Close()
     {
+        Debug.Log("UI Closed");
         Destroy(millerIindicesButton);
         Destroy(quizButton);
         Destroy(loadButton);
